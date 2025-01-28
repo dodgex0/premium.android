@@ -1,15 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Açılır Menü</title>
+    <title>Karanlık Tema & Menü</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        /* Temel renk değişkenleri */
+        :root {
+            --bg-color: #1a1a1a;
+            --text-color: #ffffff;
+            --menu-bg: #2d2d2d;
+            --hover-color: #3d3d3d;
+            --border-color: #404040;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
         /* Hamburger Menü İkonu */
         .menu-btn {
             display: block;
             position: fixed;
             top: 20px;
-            right: 20px;
+            left: 20px; /* Sola taşıdık */
             z-index: 3;
             cursor: pointer;
         }
@@ -19,25 +34,35 @@
             width: 30px;
             height: 3px;
             margin: 5px 0;
-            background: #333;
-            transition: 0.5s;
+            background: var(--text-color);
+            transition: all 0.4s ease;
         }
 
         /* Menü Listesi */
         .menu-list {
-            display: none;
             position: fixed;
             top: 0;
-            right: 0;
+            left: -250px; /* Soldan açılacak */
             width: 200px;
             height: 100%;
-            background: #f1f1f1;
+            background: var(--menu-bg);
             padding: 80px 20px 20px;
-            box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
             z-index: 2;
+            transition: all 0.4s ease;
+            opacity: 0;
         }
 
-        /* Menü Açıkken Hamburger İkonu Animasyonu */
+        /* Menü Açıkken Stiller */
+        .menu-open .menu-list {
+            left: 0;
+            opacity: 1;
+        }
+
+        .menu-open .menu-btn span {
+            background: var(--text-color);
+        }
+
         .menu-open .menu-btn span:nth-child(1) {
             transform: rotate(45deg) translate(5px, 5px);
         }
@@ -55,12 +80,18 @@
             display: block;
             padding: 10px;
             text-decoration: none;
-            color: #333;
-            border-bottom: 1px solid #ddd;
+            color: var(--text-color);
+            border-bottom: 1px solid var(--border-color);
+            transition: 0.3s;
         }
 
         .menu-list a:hover {
-            background: #ddd;
+            background: var(--hover-color);
+        }
+
+        /* Ekstra Karanlık Tema Elementleri */
+        h1, p {
+            margin: 20px;
         }
     </style>
 </head>
@@ -79,11 +110,11 @@
         <a href="uygulamalar.html">Uygulamalar</a>
     </nav>
 
+    <!-- İçerik Örneği -->
+
     <script>
         function toggleMenu() {
             document.body.classList.toggle("menu-open");
-            const menu = document.getElementById("menu");
-            menu.style.display = (menu.style.display === "block") ? "none" : "block";
         }
     </script>
 </body>
