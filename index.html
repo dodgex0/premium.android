@@ -1,61 +1,90 @@
 <!DOCTYPE html>
-<html lang="tr">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>Document</title>
-
-    <link rel="stylesheet" href="kopyasite.css">
-
-
+    <title>Açılır Menü</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-
-        ul{
-            list-style-type: none;
-            
-            width: 12%;
+        /* Hamburger Menü İkonu */
+        .menu-btn {
+            display: block;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 3;
+            cursor: pointer;
+        }
+        
+        .menu-btn span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            margin: 5px 0;
+            background: #333;
+            transition: 0.5s;
         }
 
-        ul li{
-            padding: 4px;
-            background-color: #3F3F3F;
-            margin-left: -20px;
+        /* Menü Listesi */
+        .menu-list {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 100%;
+            background: #f1f1f1;
+            padding: 80px 20px 20px;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+            z-index: 2;
         }
 
-        ul li:hover{
-            background-color: red;
-            transition: 0.3s;
+        /* Menü Açıkken Hamburger İkonu Animasyonu */
+        .menu-open .menu-btn span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
         }
 
-        ul li a{
+        .menu-open .menu-btn span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-open .menu-btn span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Menü Linkleri */
+        .menu-list a {
+            display: block;
+            padding: 10px;
             text-decoration: none;
-            color: #fff;
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: bold;
+            color: #333;
+            border-bottom: 1px solid #ddd;
         }
 
-        ul li:nth-child(1){
-            background-color: rgb(64, 255, 0);
+        .menu-list a:hover {
+            background: #ddd;
         }
     </style>
 </head>
 <body>
+    <!-- Hamburger Menü İkonu -->
+    <div class="menu-btn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
-   
-    <ul>
-        <li><a href="#">HOME</a></li>
-        <li><a href="#">News</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">About</a></li>
-    </ul>
+    <!-- Menü İçeriği -->
+    <nav class="menu-list" id="menu">
+        <a href="anasayfa.html">Anasayfa</a>
+        <a href="oyunlar.html">Oyunlar</a>
+        <a href="uygulamalar.html">Uygulamalar</a>
+    </nav>
 
-    
-
-
-
-
-
-
+    <script>
+        function toggleMenu() {
+            document.body.classList.toggle("menu-open");
+            const menu = document.getElementById("menu");
+            menu.style.display = (menu.style.display === "block") ? "none" : "block";
+        }
+    </script>
 </body>
 </html>
